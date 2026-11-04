@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hub NEON</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Os arquivos e passo a passos dos vídeos do NEON, num lugar só.">
+<meta name="theme-color" content="#0B0C10">
+<link rel="icon" href="img/favicon.png">
+<style>
+/* Layout: coluna única de 720px; lista de conteúdos em linhas; página do conteúdo com passos numerados; bloco de oferta NEON EDIT no fim. */
+:root{
+  --bg:#0B0C10; --surface:#15171E; --surface-2:#1C1F28; --line:#2A2D38;
+  --neon:#C6F432; --on-neon:#0B0C10; --text:#F2F3F7; --muted:#A3A8BA;
+  --font:"Space Grotesk",ui-sans-serif,system-ui,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --ease:cubic-bezier(.2,.9,.25,1.15);
+  color-scheme:dark;
+}
+@font-face{font-family:"Space Grotesk";src:url("img/SpaceGrotesk.woff") format("woff");font-weight:300 700;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url("img/JetBrainsMono.woff") format("woff");font-weight:100 800;font-display:swap}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--neon);outline-offset:3px;border-radius:6px}
+.wrap{max-width:720px;margin-inline:auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon)}
+.hl{color:var(--neon)}
+
+header{padding-block:28px 8px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{height:44px;width:auto;mix-blend-mode:lighten}
+.brand span{font-weight:700;font-size:17px;letter-spacing:-.01em}
+.count{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+
+/* Lista */
+.intro{display:grid;gap:12px;padding-block:36px 28px}
+.intro h1{font-size:clamp(32px,7vw,46px);font-weight:700;letter-spacing:-.03em}
+.intro p{color:var(--muted);font-size:17px;max-width:46ch}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.item a{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:16px;align-items:center;padding:18px 4px;border-bottom:1px solid var(--line);text-decoration:none;transition:background .2s ease}
+.item a:hover{background:rgba(255,255,255,.02)}
+.item .num{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.item .meta{display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.item .kind{color:var(--neon)}
+.item h2{font-size:19px;font-weight:700}
+.item p{color:var(--muted);font-size:14.5px;margin-top:3px}
+.item .go{font-size:14px;font-weight:500;color:var(--neon);white-space:nowrap}
+.empty{padding:28px 4px;color:var(--muted);border-bottom:1px solid var(--line)}
+
+/* Página do conteúdo */
+.back{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:14px;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--text)}
+.detail-head{display:grid;gap:14px;padding-block:22px 26px}
+.detail-head h1{font-size:clamp(32px,7vw,48px);font-weight:700;letter-spacing:-.03em}
+.detail-head p{color:#D3D6E0;font-size:17px;max-width:54ch}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:999px;background:var(--neon);color:var(--on-neon);font-weight:700;font-size:15px;letter-spacing:.02em;text-decoration:none;border:0;font-family:inherit;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s ease;box-shadow:0 10px 30px -12px rgba(198,244,50,.6)}
+.btn:hover{transform:translateY(-2px)}
+.btn svg{width:18px;height:18px}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}
+.btn[aria-disabled="true"]{background:var(--surface-2);color:var(--muted);box-shadow:none;pointer-events:none}
+.steps-title{font-size:22px;font-weight:700;margin:12px 0 16px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:p}
+.steps li{counter-increment:p;display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;align-items:start;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.steps li::before{content:counter(p);width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(198,244,50,.12);color:var(--neon);font-family:var(--mono);font-weight:500}
+.steps .st{display:block;font-size:16px;margin-bottom:2px}
+.steps span b{color:#D9DCE6;font-weight:500}
+.steps span{color:var(--muted);font-size:15px}
+.steps code,.prompt code{font-family:var(--mono);font-size:13.5px;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--text)}
+.prompt{margin-top:18px;padding:16px;border-radius:14px;border:1px dashed #3A3E4C;display:grid;gap:10px}
+.prompt .row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.prompt q{quotes:none;font-size:16px;color:var(--text)}
+.copy{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--neon);background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer}
+
+.blk{margin-top:30px}
+.para{color:#C9CCD8;font-size:16px;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips code{font-family:var(--mono);font-size:13px;padding:6px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--neon)}
+.req{margin:0;display:grid;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.req div{display:grid;grid-template-columns:minmax(110px,32%) minmax(0,1fr);gap:14px;padding:12px 16px;background:var(--surface)}
+.req div + div{border-top:1px solid var(--line)}
+.req dt{font-weight:700;font-size:14.5px}
+.req dd{margin:0;color:var(--muted);font-size:14.5px}
+.code{margin-top:10px;border:1px solid var(--line);border-radius:12px;background:#0E0F14;overflow:hidden;min-width:0}
+.code-h span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.code-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 8px 6px 12px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.code pre{margin:0;padding:12px;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#E6E8EF;overflow-x:auto;white-space:pre}
+.steps li > div{min-width:0}
+.nota{display:block;margin-top:10px;font-size:13.5px;color:var(--muted);padding-left:10px;border-left:2px solid #3A3E4C}
+.credit{font-size:14px;color:var(--muted)}
+.credit b{color:var(--text);font-weight:500}
+.aviso{font-size:14px;color:#D9DCE6;padding:12px 14px;border-radius:12px;background:rgba(198,244,50,.07);border:1px solid rgba(198,244,50,.22)}
+.list-title{font-size:20px;font-weight:700;margin:6px 0 12px}
+.offer.top{margin-block:6px 36px}
+
+/* Oferta NEON EDIT */
+.offer{margin-block:48px 24px;border:1px solid var(--line);border-radius:22px;background:radial-gradient(120% 120% at 100% 0%,rgba(198,244,50,.1),transparent 55%),var(--surface);padding:clamp(22px,5vw,34px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;box-shadow:0 0 70px -40px rgba(198,244,50,.5)}
+.offer img{width:92px;height:auto;mix-blend-mode:lighten}
+.offer-txt{display:grid;gap:10px;min-width:0}
+.offer h2{font-size:clamp(22px,4.6vw,28px);font-weight:700}
+.offer p{color:var(--muted);font-size:15px}
+.offer .row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:6px}
+.offer .price{font-size:26px;font-weight:700;letter-spacing:-.03em}
+
+footer{padding-block:28px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:24px}
+
+@media (max-width:560px){
+  .item a{grid-template-columns:30px minmax(0,1fr);gap:12px}
+  .item .go{display:none}
+  .offer{grid-template-columns:1fr;justify-items:start}
+  .offer img{width:72px}
+  .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v12M6 11l6 6 6-6M5 20h14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.52.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5Z"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap top">
+    <a class="brand" href="#" aria-label="Hub NEON, início"><img src="img/logo.webp" alt="" width="446" height="520"><span>Hub NEON</span></a>
+    <span class="count" id="count"></span>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<footer>
+  <div class="wrap">NEON EDIT é um produto independente. Não é o Claude e não é afiliado à Anthropic.</div>
+</footer>
+
+<script src="conteudos.js"></script>
+<script>
+(function(){
+  const LIST = (window.CONTEUDOS || []).slice();
+  const app = document.getElementById("app");
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const fmt = d => { const [y,m,dd] = String(d).split("-"); return dd && m ? `${dd}/${m}/${y}` : esc(d); };
+
+  /* Passo a passo padrão para instalar uma skill no Claude (claude.ai e app). */
+  const PASSOS_SKILL = [
+    ["Baixe o arquivo", "Toque no botão de download acima. Não precisa descompactar o arquivo .zip."],
+    ["Ative a criação de arquivos", "No Claude, abra <b>Settings › Capabilities</b> e ative <b>Code execution and file creation</b>. Em algumas versões, ele aparece como <b>Create and edit files</b>."],
+    ["Abra a área de skills", "Vá em <b>Customize › Skills</b>, toque no <b>+</b> e depois em <b>Create skill</b>."],
+    ["Envie o arquivo", "Escolha <b>Upload a skill</b> e selecione o .zip que você baixou."],
+    ["Ative e use", "Deixe a skill ligada na lista e abra uma conversa nova para usar."]
+  ];
+
+  const offer = (pos) => `
+    <aside class="offer${pos === "top" ? " top" : ""}" aria-labelledby="offer-h">
+      <img src="img/logo.webp" alt="NEON EDIT" width="446" height="520" loading="lazy">
+      <div class="offer-txt">
+        <span class="tag">Edição de vídeos com IA</span>
+        <h2 id="offer-h">Você grava. <span class="hl">A IA edita no seu estilo.</span></h2>
+        <p>Com o NEON EDIT, o Claude corta, legenda e anima os seus vídeos com a cara do seu projeto.</p>
+        <div class="row">
+          <a class="btn" href="${esc(window.NEON_EDIT_URL)}" target="_blank" rel="noopener">CONHECER O NEON EDIT<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <span class="price">R$97</span>
+        </div>
+      </div>
+    </aside>`;
+
+  function renderList(){
+    document.title = "Hub NEON";
+    const items = LIST.map((c, i) => `
+      <li class="item"><a href="#${esc(c.id)}">
+        <span class="num">${String(LIST.length - i).padStart(2,"0")}</span>
+        <span>
+          <span class="meta"><span class="kind">${esc(c.tipo || "Conteúdo")}</span><span>${fmt(c.data)}</span></span>
+          <h2>${esc(c.titulo)}</h2>
+          ${c.resumo ? `<p>${esc(c.resumo)}</p>` : ""}
+        </span>
+        <span class="go">Abrir →</span>
+      </a></li>`).join("");
+    app.innerHTML = `
+      <section class="intro">
+        <span class="tag">Conteúdos dos vídeos</span>
+        <h1>Tudo dos meus vídeos, <span class="hl">num lugar só.</span></h1>
+        <p>Escolha o conteúdo do vídeo que você viu e siga o passo a passo.</p>
+      </section>
+      ${offer("top")}
+      <h2 class="list-title">Conteúdos</h2>
+      <ul class="list">${items || `<li class="empty">Os primeiros conteúdos chegam em breve.</li>`}</ul>`;
+  }
+
+  const copyBtn = (id) => `<button class="copy" type="button" data-copy="${id}">Copiar</button>`;
+  let cid = 0;
+  function block(bk){
+    let out = bk.h ? `<h2 class="steps-title">${esc(bk.h)}</h2>` : "";
+    if (bk.p) out += `<p class="para">${esc(bk.p)}</p>`;
+    if (bk.chips) out += `<div class="chips">${bk.chips.map(x => `<code>${esc(x)}</code>`).join("")}</div>`;
+    if (bk.tabela) out += `<dl class="req">${bk.tabela.map(r => `<div><dt>${esc(r[0])}</dt><dd>${esc(r[1])}</dd></div>`).join("")}</dl>`;
+    if (bk.passos) out += `<ol class="steps">${bk.passos.map(p => {
+      let code = "";
+      if (p.codigo) { const id = "c" + (++cid); code = `<div class="code"><div class="code-h"><span>${esc(p.label || "Copie")}</span>${copyBtn(id)}</div><pre id="${id}">${esc(p.codigo)}</pre></div>`; }
+      return `<li><div><strong class="st">${esc(p.t)}</strong>${p.p ? `<span>${esc(p.p)}</span>` : ""}${code}${p.nota ? `<small class="nota">${esc(p.nota)}</small>` : ""}</div></li>`;
+    }).join("")}</ol>`;
+    return `<section class="blk">${out}</section>`;
+  }
+
+  function renderDetail(c){
+    document.title = `${c.titulo} · Hub NEON`;
+    cid = 0;
+    let body;
+    if (Array.isArray(c.blocos) && c.blocos.length) {
+      body = c.blocos.map(block).join("");
+    } else {
+      const passos = Array.isArray(c.passos) && c.passos.length ? c.passos : PASSOS_SKILL;
+      body = `<h2 class="steps-title">Passo a passo</h2><ol class="steps">${passos.map(p => Array.isArray(p)
+        ? `<li><div><strong class="st">${esc(p[0])}</strong><span>${p[1]}</span></div></li>`
+        : `<li><div><span>${esc(p)}</span></div></li>`).join("")}</ol>`;
+    }
+    const btns = [];
+    if (c.arquivo) btns.push(`<a class="btn" href="${esc(c.arquivo)}" download><svg aria-hidden="true"><use href="#i-down"/></svg>BAIXAR ${esc((c.tipo || "arquivo").toUpperCase())}</a>`);
+    if (c.repo) btns.push(`<a class="btn${c.arquivo ? " ghost" : ""}" href="${esc(c.repo)}" target="_blank" rel="noopener">VER NO GITHUB<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>`);
+    if (!btns.length) btns.push(`<a class="btn" aria-disabled="true" role="link">ARQUIVO EM BREVE</a>`);
+    if (c.video) btns.push(`<a class="btn ghost" href="${esc(c.video)}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-play"/></svg>Ver o vídeo</a>`);
+    const credit = (c.autor || c.licenca) ? `<p class="credit">${c.autor ? `Criado por <b>${esc(c.autor)}</b>` : ""}${c.autor && c.licenca ? " · " : ""}${c.licenca ? `Licença ${esc(c.licenca)}` : ""}</p>` : "";
+    const ex = c.exemplo ? `
+      <div class="prompt">
+        <span class="tag">Depois de instalar, mande isto para o Claude</span>
+        <div class="row"><q id="ex">${esc(c.exemplo)}</q>${copyBtn("ex")}</div>
+      </div>` : "";
+    app.innerHTML = `
+      <a class="back" href="#"><svg width="16" height="16" aria-hidden="true"><use href="#i-back"/></svg>Todos os conteúdos</a>
+      <section class="detail-head">
+        <span class="meta tag">${esc(c.tipo || "Conteúdo")} · ${fmt(c.data)}</span>
+        <h1>${esc(c.titulo)}</h1>
+        ${c.descricao ? `<p>${esc(c.descricao)}</p>` : ""}
+        ${credit}
+        <div class="actions">${btns.join("")}</div>
+        ${c.aviso ? `<p class="aviso">${esc(c.aviso)}</p>` : ""}
+      </section>
+      ${body}
+      ${ex}
+      ${offer()}`;
+    app.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", () => {
+      const el = document.getElementById(btn.dataset.copy);
+      const t = el.textContent;
+      const done = () => { btn.textContent = "Copiado"; setTimeout(() => btn.textContent = "Copiar", 1800); };
+      const sel = () => { const r = document.createRange(); r.selectNodeContents(el); const g = getSelection(); g.removeAllRanges(); g.addRange(r); };
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(done).catch(sel); else sel();
+    }));
+  }
+
+  function route(){
+    const id = decodeURIComponent(location.hash.replace(/^#/, ""));
+    const c = id && LIST.find(x => x.id === id);
+    if (c) renderDetail(c); else renderList();
+    window.scrollTo(0, 0);
+  }
+  document.getElementById("count").textContent = `${LIST.length} ${LIST.length === 1 ? "conteúdo" : "conteúdos"}`;
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+</body>
+</html>
