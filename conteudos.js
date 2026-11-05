@@ -21,6 +21,76 @@ window.NEON_EDIT_URL = "https://neon-edit.netlify.app/";
 
 window.CONTEUDOS = [
   {
+    id: "claude-md",
+    titulo: "CLAUDE.md: as 4 regras",
+    tipo: "Arquivo",
+    data: "2026-11-05",
+    resumo: "Um arquivo de texto que faz o Claude Code parar de complicar, chutar, mexer no que você não pediu e dizer que terminou sem conferir.",
+    descricao: "O CLAUDE.md é um arquivo de texto que fica na pasta do seu projeto. O Claude Code lê esse arquivo toda vez que começa a trabalhar ali. Este traz 4 regras baseadas nas observações do Andrej Karpathy sobre os erros que a IA comete quando programa. Não é programa: não tem nada para instalar nem para rodar.",
+    autor: "forrestchang",
+    licenca: "MIT",
+    repo: "https://github.com/forrestchang/andrej-karpathy-skills",
+    arquivo: "",
+    video: "",
+    aviso: "",
+    blocos: [
+      { h: "As 4 regras",
+        tabela: [
+          ["1. Pensa antes de fazer", "Não supõe nada. Se o pedido dá para entender de mais de um jeito, mostra as opções. Se não entendeu, para e pergunta."],
+          ["2. Simples primeiro", "Faz o mínimo que resolve. Nada que você não pediu e nada \"para caso precise depois\"."],
+          ["3. Mexe só no que foi pedido", "Não \"melhora\" o resto, não reformata e não apaga o que já estava lá. Cada mudança tem que vir do seu pedido."],
+          ["4. Define o que é pronto e confere", "Antes de começar, transforma o pedido em algo que dá para testar. Só diz que terminou depois de conferir."]
+        ] },
+      { h: "O que você precisa",
+        tabela: [
+          ["Claude Code", "É onde o CLAUDE.md é lido sozinho: no terminal, no app de desktop (aba Code) e na extensão do VS Code."],
+          ["Uma pasta de projeto", "Qualquer pasta onde você trabalha com o Claude Code."]
+        ] },
+      { h: "Instalação: escolha um jeito",
+        passos: [
+          { t: "O mais fácil: mande o link para o Claude Code",
+            p: "Abra o Claude Code dentro da pasta do seu projeto e mande:",
+            label: "Mande no Claude Code",
+            codigo: "https://github.com/forrestchang/andrej-karpathy-skills\n\nBaixa o CLAUDE.md desse repositório e coloca na raiz deste projeto.\nSe já existir um CLAUDE.md aqui, não apaga nada: acrescenta o conteúdo no final do que já existe.",
+            nota: "Ele baixa o arquivo e mostra onde colocou. A partir da próxima conversa nesse projeto, as regras já valem." },
+          { t: "Como plugin, para todos os seus projetos",
+            p: "Dentro do Claude Code, rode os dois comandos, um de cada vez:",
+            label: "Cole no Claude Code",
+            codigo: "/plugin marketplace add forrestchang/andrej-karpathy-skills\n/plugin install andrej-karpathy-skills@karpathy-skills",
+            nota: "O primeiro só registra o repositório. Quem instala é o segundo." },
+          { t: "Pelo terminal, num projeto que ainda não tem CLAUDE.md",
+            p: "Na pasta do projeto:",
+            label: "macOS ou Linux",
+            codigo: "curl -o CLAUDE.md https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/main/CLAUDE.md" },
+          { t: "Pelo terminal, num projeto que já tem CLAUDE.md",
+            p: "Assim as regras entram no final, sem apagar as suas:",
+            label: "macOS ou Linux",
+            codigo: "echo \"\" >> CLAUDE.md\ncurl https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/main/CLAUDE.md >> CLAUDE.md" },
+          { t: "Pelo terminal no Windows",
+            p: "No PowerShell, use curl.exe (o curl sozinho é outro comando):",
+            label: "Cole no PowerShell",
+            codigo: "curl.exe -o CLAUDE.md https://raw.githubusercontent.com/forrestchang/andrej-karpathy-skills/main/CLAUDE.md",
+            nota: "Esse comando cria o arquivo do zero. Se o projeto já tem um CLAUDE.md, use o jeito do link no Claude Code para não apagar o seu." }
+        ] },
+      { h: "Quer que valha em todos os projetos, sem plugin?",
+        p: "O Claude Code também lê um CLAUDE.md pessoal, que vale para tudo: ~/.claude/CLAUDE.md (no Windows, C:\\Users\\SEU-USUARIO\\.claude\\CLAUDE.md). Cole as regras no final desse arquivo. Se ele não existir, peça para o Claude Code: \"cria o meu CLAUDE.md pessoal com as regras deste link\"." },
+      { h: "Como saber se funcionou",
+        passos: [
+          { t: "Confira onde está o arquivo", p: "Ele tem que estar na raiz do projeto: seu-projeto/CLAUDE.md, e não dentro de outra pasta." },
+          { t: "Pergunte para o Claude", p: "Abra uma conversa nova nessa pasta e pergunte: \"quais regras do CLAUDE.md você está seguindo?\". Ele tem que citar as 4." },
+          { t: "Repare no dia a dia", p: "Ele passa a perguntar antes quando o pedido é ambíguo, e as mudanças ficam menores. Para coisas simples, é só dizer \"pode seguir, é simples\"." }
+        ] },
+      { h: "Deu erro?",
+        tabela: [
+          ["Não segue as regras", "Confira se o arquivo está na raiz da pasta que o Claude Code abriu e abra uma conversa nova. A que já estava aberta não relê o arquivo."],
+          ["Apagou o meu CLAUDE.md antigo", "Isso acontece com o curl -o num projeto que já tinha o arquivo. Desfaça pelo Git ou peça para o Claude recuperar, e use o jeito que acrescenta no final."],
+          ["/plugin não existe", "Atualize o Claude Code ou use o jeito do link."],
+          ["Estou no claude.ai (chat)", "O CLAUDE.md é do Claude Code. No chat, dá para colar as regras nas instruções de um Projeto, mas não funciona igual."]
+        ] }
+    ],
+    exemplo: "Quais regras do CLAUDE.md você está seguindo?"
+  },
+  {
     id: "hypit",
     titulo: "Hypit",
     tipo: "Skill",
