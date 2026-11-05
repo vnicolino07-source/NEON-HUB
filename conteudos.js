@@ -21,6 +21,84 @@ window.NEON_EDIT_URL = "https://neon-edit.netlify.app/";
 
 window.CONTEUDOS = [
   {
+    id: "hypit",
+    titulo: "Hypit",
+    tipo: "Skill",
+    data: "2026-11-05",
+    resumo: "Recrie o formato de um vídeo viral com o Claude Code e gere várias versões dele para o seu produto.",
+    descricao: "Programa gratuito e de código aberto que ensina o Claude Code a fazer vídeo. Você manda um vídeo de referência e ele recria o formato cena por cena, com pessoa falando, legendas, animações e som. Depois você troca o produto, o rosto, a voz ou a língua e gera várias versões do mesmo formato.",
+    autor: "Hypit.AI",
+    licenca: "Apache 2.0 com condições",
+    repo: "https://github.com/hypit-ai/hypit",
+    arquivo: "",
+    video: "",
+    aviso: "O programa é de graça, mas gerar imagem, vídeo e voz com IA é cobrado pelo serviço que você escolher. O próprio Hypit mostra o orçamento antes de gastar.",
+    blocos: [
+      { h: "O que ele faz",
+        p: "O Claude assiste ao vídeo de referência, explica por que ele prende (o gancho, onde entra cada legenda, o que cada cena faz) e recria o vídeo inteiro no mesmo formato. Também dá para começar sem referência, só descrevendo o vídeo que você quer." },
+      { h: "Quanto custa",
+        tabela: [
+          ["O Hypit", "Grátis. Sem mensalidade, sem marca d'água e sem taxa por vídeo."],
+          ["Gerar com IA", "Imagens, cenas, voz e transcrição são cobradas pelo serviço que você ligar: o HypiHub (dos criadores do Hypit) ou a chave de API de outro serviço."],
+          ["Exemplo real", "Nos exemplos do repositório, cada vídeo pronto custou entre US$ 1,07 e US$ 1,15."],
+          ["Versões", "Trocar só legenda, texto ou animação reaproveita o que já foi gerado e sai bem mais barato. Um vídeo só de legenda e animação não gasta nada com IA."]
+        ] },
+      { h: "O que você precisa",
+        tabela: [
+          ["Claude Code", "Obrigatório. No chat do claude.ai ele não funciona, porque precisa rodar programas no seu computador."],
+          ["Node.js 22.15 ou mais novo", "Baixe a versão LTS em nodejs.org. Para conferir, rode node -v no terminal."],
+          ["Serviço de IA", "Só na hora de gerar imagem, vídeo ou voz. O Claude pergunta qual você quer usar."],
+          ["Vídeo de referência", "Um arquivo .mp4 no seu computador ou o link do vídeo."]
+        ] },
+      { h: "Passo a passo",
+        passos: [
+          { t: "Instale a skill",
+            p: "Abra o terminal e rode o comando abaixo. Se ele perguntar para qual programa instalar, escolha o Claude Code.",
+            label: "Cole no terminal",
+            codigo: "npx skills add hypit-ai/hypit -g",
+            nota: "Prefere não usar o terminal? Abra o Claude Code e mande: \"instala a skill do Hypit pra mim: https://github.com/hypit-ai/hypit\". Depois feche e abra o Claude Code e digite /hypit. Ela tem que aparecer na lista." },
+          { t: "Não apareceu? Instale na mão no Windows",
+            p: "No PowerShell:",
+            label: "Cole no PowerShell",
+            codigo: "git clone https://github.com/hypit-ai/hypit.git\nCopy-Item -Recurse hypit\\skills\\hypit \"$env:USERPROFILE\\.claude\\skills\\hypit\"",
+            nota: "O arquivo tem que ficar em C:\\Users\\SEU-USUARIO\\.claude\\skills\\hypit\\SKILL.md, junto com a pasta references. Se ficar uma pasta hypit dentro de outra, o Claude não encontra." },
+          { t: "Não apareceu? Instale na mão no macOS ou Linux",
+            label: "Cole no terminal",
+            codigo: "git clone https://github.com/hypit-ai/hypit.git\nmkdir -p ~/.claude/skills\ncp -r hypit/skills/hypit ~/.claude/skills/" },
+          { t: "Crie uma pasta para o vídeo",
+            p: "Crie uma pasta vazia, por exemplo Documentos/videos/meu-primeiro-hypit, coloque o vídeo de referência dentro dela e abra o Claude Code nessa pasta. Ali ficam o roteiro, as cenas e o vídeo final. Na primeira vez, o Claude confere se falta alguma coisa e instala para você." },
+          { t: "Peça o clone",
+            p: "Troque o que está entre colchetes pelo seu:",
+            label: "Mande no Claude Code",
+            codigo: "/hypit Usa este vídeo como referência: [nome-do-arquivo.mp4].\nRefaz no mesmo formato, mas troca [o produto do vídeo] por [o meu produto: nome, o que faz, link].\nMantém a abertura e o ritmo. Em português do Brasil.",
+            nota: "Outras trocas no mesmo pedido: \"usa o meu rosto, a foto está em eu.jpg\", \"usa a minha voz, tem um áudio meu em voz.mp3\", \"faz a versão em espanhol\" ou \"faz em quadrado para o feed\"." },
+          { t: "Aprove o orçamento",
+            p: "O Claude explica a referência, pergunta qual serviço usar e mostra o que vai gerar e quanto custa antes de começar. Se estiver de acordo, responda algo como: \"Pode usar a minha conta do HypiHub, dentro desse orçamento. Pode seguir.\" Se precisar passar do valor, ele pergunta de novo." },
+          { t: "Ajuste e gere as versões",
+            p: "O vídeo sai na pasta do projeto. Peça ajustes como \"deixa a legenda maior e amarela\" ou \"o gancho tá lento, corta o primeiro segundo\". Gostou? Peça as variações:",
+            label: "Mande no Claude Code",
+            codigo: "Gera 10 versões deste vídeo, cada uma com um gancho diferente nos primeiros 3 segundos. O resto fica igual. Me mostra o orçamento antes.",
+            nota: "Só o que muda é gerado de novo. Peça o orçamento antes de mandar gerar muitas versões." }
+        ] },
+      { h: "Regras de uso",
+        tabela: [
+          ["Clone o formato, não a pessoa", "Use o seu rosto, a sua voz ou um avatar de IA. Usar o rosto ou a voz de outra pessoa sem autorização dá problema legal e de reputação."],
+          ["Não reposte o vídeo dos outros", "A referência serve para aprender a estrutura. O vídeo que você publica tem que ser seu."],
+          ["Os vídeos são seus", "Pode usar comercialmente e para clientes. A licença só proíbe vender o próprio Hypit ou oferecê-lo como serviço para outras pessoas."],
+          ["Serviços de IA", "O que é gerado por serviço de terceiros pode ter regras próprias. Confira as do serviço que você escolher."]
+        ] },
+      { h: "Deu erro?",
+        tabela: [
+          ["/hypit não aparece", "Veja os passos de instalação na mão acima e feche e abra o Claude Code."],
+          ["\"node: command not found\"", "Instale o Node.js LTS em nodejs.org e abra o terminal de novo."],
+          ["Pede chave de API e você não tem", "Pergunte: \"me explica as opções de serviço e quanto custa cada uma\"."],
+          ["Parou no meio", "Pergunte: \"por que parou? o que falta?\""],
+          ["Não funciona no claude.ai", "Tem que ser no Claude Code. O chat não roda programas no seu computador."]
+        ] }
+    ],
+    exemplo: "/hypit Faz um vídeo de ranking colocando [o meu produto] no topo."
+  },
+  {
     id: "instagram-agent",
     titulo: "Instagram Agent",
     tipo: "Skill",
