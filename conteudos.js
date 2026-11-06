@@ -21,6 +21,91 @@ window.NEON_EDIT_URL = "https://neon-edit.netlify.app/";
 
 window.CONTEUDOS = [
   {
+    id: "virality-predictor",
+    titulo: "Virality Predictor",
+    tipo: "Skill",
+    data: "2026-11-06",
+    resumo: "Dê uma nota para o potencial de viralização do seu vídeo e veja onde as pessoas perdem o interesse, antes de postar.",
+    descricao: "O Virality Predictor é uma ferramenta da Higgsfield que analisa um vídeo pronto e estima como o público deve reagir: a força do gancho, a atenção e a retenção ao longo do vídeo. Ele vem dentro das skills oficiais da Higgsfield para o Claude Code, então você pede a análise numa conversa e recebe as notas e um relatório completo.",
+    autor: "Higgsfield AI",
+    licenca: "MIT (as skills)",
+    repo: "https://github.com/higgsfield-ai/skills",
+    arquivo: "",
+    video: "",
+    aviso: "É uma estimativa, não uma garantia de viralizar. Use para comparar versões do mesmo vídeo e achar os pontos fracos antes de postar.",
+    blocos: [
+      { h: "O que você recebe",
+        tabela: [
+          ["Nota geral", "Uma pontuação do potencial do vídeo para prender a atenção."],
+          ["Gancho", "Se os primeiros segundos seguram a pessoa ou fazem ela passar."],
+          ["Retenção", "Em que momentos a atenção sobe e onde ela cai, segundo a segundo."],
+          ["Relatório", "Um link para abrir o relatório completo, com o gráfico e o mapa de atenção."]
+        ] },
+      { h: "O que você precisa",
+        tabela: [
+          ["Claude Code", "É onde as skills da Higgsfield rodam. No chat do claude.ai elas não funcionam."],
+          ["Node.js", "Para instalar as skills. Baixe a versão LTS em nodejs.org."],
+          ["Conta na Higgsfield", "Crie a sua em higgsfield.ai. As análises usam a sua conta e podem consumir créditos. Confira o saldo antes."],
+          ["O vídeo pronto", "Um arquivo .mp4 no seu computador."]
+        ] },
+      { h: "Instalação: escolha um jeito",
+        passos: [
+          { t: "O mais fácil: deixe o Claude instalar",
+            p: "Abra o Claude Code em qualquer pasta e mande:",
+            label: "Mande no Claude Code",
+            codigo: "https://github.com/higgsfield-ai/skills\n\nInstala as skills da Higgsfield com: npx skills add higgsfield-ai/skills\nDepois instala a Higgsfield CLI e me ajuda a fazer o login.",
+            nota: "Ele instala tudo e abre o login da Higgsfield no navegador para você entrar na sua conta." },
+          { t: "Pelo terminal",
+            label: "Cole no terminal",
+            codigo: "npx skills add higgsfield-ai/skills",
+            nota: "Isso instala as 8 skills da Higgsfield. O Virality Predictor fica dentro da skill higgsfield-generate." },
+          { t: "Pelo plugin do Claude Code",
+            p: "Dentro do Claude Code, rode os dois comandos, um de cada vez:",
+            label: "Cole no Claude Code",
+            codigo: "/plugin marketplace add higgsfield-ai/skills\n/plugin install higgsfield@higgsfield" },
+          { t: "Instale a Higgsfield CLI e entre na sua conta",
+            p: "Se você usou o jeito do Claude, ele já faz isso. Se não, rode no terminal:",
+            label: "macOS ou Linux",
+            codigo: "curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh\nhiggsfield auth login" },
+          { t: "No Windows",
+            label: "Cole no PowerShell",
+            codigo: "npm install -g @higgsfield/cli\nhiggsfield auth login",
+            nota: "O login abre no navegador. Entre com a sua conta da Higgsfield e volte para o terminal." }
+        ] },
+      { h: "Como analisar o seu vídeo",
+        passos: [
+          { t: "Abra o Claude Code na pasta do vídeo",
+            p: "Coloque o .mp4 numa pasta e abra o Claude Code dentro dela." },
+          { t: "Peça a análise",
+            p: "Troque o nome do arquivo pelo seu:",
+            label: "Mande no Claude Code",
+            codigo: "Analisa este vídeo com o Virality Predictor da Higgsfield: [meu-video.mp4].\nMe mostra a nota geral, a força do gancho e em que segundos as pessoas devem perder o interesse.\nDepois me diz o que mudar no corte, no ritmo e na legenda." },
+          { t: "Abra o relatório completo",
+            p: "O Claude te devolve as notas e um link para o relatório, com o gráfico de retenção. Ajuste o vídeo, analise de novo e compare as notas." },
+          { t: "Quer rodar direto, sem o Claude?",
+            p: "Com a CLI instalada, na pasta do vídeo:",
+            label: "Cole no terminal",
+            codigo: "higgsfield generate create brain_activity --video ./meu-video.mp4 --wait" }
+        ] },
+      { h: "Sem Claude Code",
+        p: "Você também pode usar o Virality Predictor direto no site da Higgsfield, enviando o vídeo pelo navegador." },
+      { h: "Deu erro?",
+        tabela: [
+          ["\"Not authenticated\" ou \"Session expired\"", "Rode de novo: higgsfield auth login"],
+          ["\"Missing required params: medias\"", "Faltou o vídeo. Mande exatamente um arquivo, com --video seguido do nome."],
+          ["\"higgsfield: command not found\"", "A CLI não foi instalada. Rode o comando de instalação do seu sistema e abra o terminal de novo."],
+          ["Sem créditos", "Confira o saldo com: higgsfield account"]
+        ] }
+    ],
+    oferta: {
+      tag: "Edição de vídeos com IA",
+      titulo: "Descobriu onde o vídeo perde as pessoas?",
+      destaque: "Deixe o Claude reeditar no seu estilo.",
+      texto: "Com o NEON EDIT, você pede ajustes de corte, ritmo, legenda e animação com as suas palavras e recebe uma nova prévia antes do vídeo final.",
+      botao: "CONHECER O NEON EDIT"
+    }
+  },
+  {
     id: "8-elementos",
     titulo: "Os 8 elementos de um vídeo que prende",
     tipo: "Guia",
