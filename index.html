@@ -81,6 +81,8 @@ header{padding-block:28px 8px}
 
 .blk{margin-top:30px}
 .para{color:#C9CCD8;font-size:16px;max-width:62ch}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gallery img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips code{font-family:var(--mono);font-size:13px;padding:6px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--neon)}
 .req{margin:0;display:grid;border:1px solid var(--line);border-radius:14px;overflow:hidden}
@@ -202,6 +204,7 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:13px;border-top:1px 
     let out = bk.h ? `<h2 class="steps-title">${esc(bk.h)}</h2>` : "";
     if (bk.p) out += `<p class="para">${esc(bk.p)}</p>`;
     if (bk.chips) out += `<div class="chips">${bk.chips.map(x => `<code>${esc(x)}</code>`).join("")}</div>`;
+    if (bk.imagens) out += `<div class="gallery">${bk.imagens.map(src => `<img src="${esc(src)}" alt="" loading="lazy" width="540" height="675">`).join("")}</div>`;
     if (bk.tabela) out += `<dl class="req">${bk.tabela.map(r => `<div><dt>${esc(r[0])}</dt><dd>${esc(r[1])}</dd></div>`).join("")}</dl>`;
     if (bk.passos) out += `<ol class="steps">${bk.passos.map(p => {
       let code = "";

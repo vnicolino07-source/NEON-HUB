@@ -21,6 +21,70 @@ window.NEON_EDIT_URL = "https://neon-edit.netlify.app/";
 
 window.CONTEUDOS = [
   {
+    id: "carrossel-neon",
+    titulo: "Carrossel NEON",
+    tipo: "Skill",
+    data: "2026-11-06",
+    resumo: "Uma skill para o Claude criar carrosséis prontos para o Instagram, com gancho, conteúdo, chamada para ação e o design dos slides.",
+    descricao: "Você passa 3 informações e o Claude entrega o carrossel pronto em imagens (1080×1350), para revisar e postar. Dá para partir de um carrossel que funcionou em outro perfil ou de um Reel seu que teve muitas visualizações.",
+    autor: "NEON",
+    arquivo: "arquivos/carrossel-neon.zip",
+    video: "",
+    aviso: "",
+    blocos: [
+      { h: "Como ficam os slides", imagens: ["img/carrossel/exemplo-1.jpg", "img/carrossel/exemplo-2.jpg", "img/carrossel/exemplo-4.jpg"] },
+      { h: "As 3 informações que você passa",
+        tabela: [
+          ["1. O problema do público", "A dor ou a dúvida principal de quem te segue."],
+          ["2. O contexto", "Sobre o que é o carrossel e o que a pessoa deve fazer no fim (comentar, seguir, mandar mensagem)."],
+          ["3. Uma referência", "Um carrossel que funcionou em outro perfil, ou o roteiro ou a legenda de um Reel seu que viralizou."]
+        ] },
+      { h: "O que a skill faz",
+        p: "Escreve o gancho da capa, divide o conteúdo em slides com uma ideia cada, destaca as palavras importantes, fecha com a chamada para ação e gera as imagens com as cores da sua marca. Também escreve a legenda do post. Se você pedir o mês inteiro, ela monta primeiro a lista de ideias e depois gera em lotes." },
+      { h: "Instalar no Claude (site ou app)",
+        passos: [
+          { t: "Baixe o arquivo", p: "Toque em BAIXAR SKILL, no topo da página. Não precisa descompactar o .zip." },
+          { t: "Ative a criação de arquivos", p: "No Claude, abra Settings › Capabilities e ative Code execution and file creation." },
+          { t: "Envie a skill", p: "Vá em Customize › Skills, toque no +, depois em Create skill e em Upload a skill. Escolha o carrossel-neon.zip." },
+          { t: "Use numa conversa nova", p: "Deixe a skill ligada e abra uma conversa nova. Mande o pedido do próximo bloco." }
+        ] },
+      { h: "Instalar no Claude Code",
+        passos: [
+          { t: "Deixe o Claude instalar",
+            p: "Baixe o .zip, abra o Claude Code e mande (troque pelo caminho do arquivo no seu computador):",
+            label: "Mande no Claude Code",
+            codigo: "Instala esta skill para mim: [caminho do arquivo]/carrossel-neon.zip\nDescompacta em ~/.claude/skills/carrossel-neon e confere se o SKILL.md ficou em ~/.claude/skills/carrossel-neon/SKILL.md",
+            nota: "No Windows, a pasta certa é C:\\Users\\SEU-USUARIO\\.claude\\skills\\carrossel-neon. Depois feche e abra o Claude Code." }
+        ] },
+      { h: "Peça o seu carrossel",
+        passos: [
+          { t: "A partir de uma referência",
+            label: "Mande no Claude",
+            codigo: "Cria um carrossel para o meu Instagram.\nProblema do meu público: [a dor principal]\nContexto: [o tema e o que a pessoa deve fazer no fim]\nReferência que funcionou: [cole o texto do carrossel ou mande os prints]" },
+          { t: "A partir de um Reel seu que viralizou",
+            label: "Mande no Claude",
+            codigo: "Transforma este Reel em carrossel. O roteiro do vídeo é:\n[cole o roteiro ou a legenda]\nProblema do meu público: [a dor principal]\nNo fim, a pessoa tem que comentar [PALAVRA].",
+            nota: "No Claude Code você também pode mandar o arquivo do vídeo. Se o seu computador tiver as ferramentas de transcrição, ele tira o roteiro sozinho. Se não tiver, ele te pede o roteiro." },
+          { t: "O mês inteiro",
+            label: "Mande no Claude",
+            codigo: "Monta o calendário de carrosséis do mês: 20 ideias sobre [o seu tema], misturando os formatos. Me mostra a lista antes de gerar." }
+        ] },
+      { h: "Dicas",
+        tabela: [
+          ["Use referências como inspiração", "A skill aproveita a estrutura da referência e escreve um texto novo. Não poste o texto de outro perfil."],
+          ["Revise antes de postar", "Confira os dados e o tom. Peça ajustes como \"deixa o gancho mais curto\" ou \"troca a cor do destaque\"."],
+          ["Sua marca fica salva", "No Claude Code, ela guarda as cores e o @ num arquivo marca.json e reaproveita nos próximos."]
+        ] }
+    ],
+    oferta: {
+      tag: "Edição de vídeos com IA",
+      titulo: "Já tem o carrossel.",
+      destaque: "Quer que o Claude edite os seus Reels também?",
+      texto: "Com o NEON EDIT, você grava, pede a edição com as suas palavras e o Claude faz os cortes, as legendas e as animações no seu estilo.",
+      botao: "CONHECER O NEON EDIT"
+    }
+  },
+  {
     id: "virality-predictor",
     titulo: "Virality Predictor",
     tipo: "Skill",
