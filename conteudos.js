@@ -21,6 +21,45 @@ window.NEON_EDIT_URL = "https://neon-edit.netlify.app/";
 
 window.CONTEUDOS = [
   {
+    id: "8-elementos",
+    titulo: "Os 8 elementos de um vídeo que prende",
+    tipo: "Guia",
+    data: "2026-11-06",
+    resumo: "A estrutura de roteiro que mantém a pessoa assistindo do começo ao fim, com um modelo pronto para usar no Claude.",
+    descricao: "Se as pessoas saem do seu vídeo nos primeiros segundos, talvez o problema não seja o assunto, e sim a ordem em que você conta. Estes são os 8 elementos que eu uso para segurar a atenção, inclusive no vídeo que te trouxe até aqui.",
+    semArquivo: true,
+    blocos: [
+      { h: "Os 8 elementos, na ordem",
+        passos: [
+          { t: "Gancho", p: "A primeira frase. Ela tem que fazer a pessoa parar de rolar o feed. Uma pergunta que ela mesma já se fez funciona muito bem.", nota: "No vídeo: \"Você já percebeu que alguns vídeos prendem sua atenção até o último segundo, e outros você pula em menos de três?\"" },
+          { t: "Introdução", p: "Diga o que a pessoa ganha se ficar até o fim. Uma promessa clara e específica." , nota: "No vídeo: a promessa de mostrar os 8 elementos." },
+          { t: "Desenvolvimento", p: "Comece a entregar logo. Quem promete e enrola perde a pessoa aqui." },
+          { t: "Primeiro loop aberto", p: "Deixe uma curiosidade sem resposta, para ser resolvida mais para frente. É ela que faz a pessoa continuar." },
+          { t: "Segundo desenvolvimento", p: "Aprofunde. Traga mais informação ou um exemplo, sempre com algo novo a cada poucos segundos." },
+          { t: "Segundo loop aberto", p: "Antes que o interesse caia, abra outra curiosidade.", nota: "No vídeo: \"tem um detalhe nessa estrutura que pode mudar completamente a retenção dos seus vídeos\"." },
+          { t: "Desenvolvimento final", p: "Feche as curiosidades que você abriu e entregue a resposta prometida, ligando tudo." },
+          { t: "Chamada para ação", p: "Diga exatamente o que a pessoa deve fazer agora: comentar uma palavra, seguir o perfil ou receber um material." }
+        ] },
+      { h: "O detalhe que muda tudo",
+        p: "Um gancho forte segura só os primeiros segundos. O que mantém a pessoa até o fim é ela ganhar um motivo novo para continuar em cada parte do vídeo. Por isso a estrutura abre curiosidade duas vezes, e não só no começo." },
+      { h: "Use agora com o Claude",
+        passos: [
+          { t: "Peça o seu roteiro nessa estrutura",
+            p: "Funciona em qualquer conversa com o Claude. Troque o que está entre colchetes:",
+            label: "Mande no Claude",
+            codigo: "Escreve um roteiro de Reel de até 60 segundos sobre [o seu tema], seguindo estes 8 elementos na ordem: gancho, introdução, desenvolvimento, primeiro loop aberto, segundo desenvolvimento, segundo loop aberto, desenvolvimento final e chamada para ação.\nMarca cada parte e termina com: \"comenta [PALAVRA] que eu te mando [o material]\".",
+            nota: "Peça também 3 opções de gancho e escolha a que você pararia para assistir." }
+        ] }
+    ],
+    oferta: {
+      tag: "Vídeos animados com IA",
+      titulo: "Quer criar vídeos animados",
+      destaque: "como esse, com o Claude?",
+      texto: "O vídeo que te trouxe até aqui foi editado com o NEON EDIT, seguindo essa mesma estrutura: cortes, legendas e animações feitos pelo Claude. Você grava e ele edita no seu estilo.",
+      botao: "QUERO O NEON EDIT"
+    }
+  },
+  {
     id: "claude-md",
     titulo: "CLAUDE.md: as 4 regras",
     tipo: "Arquivo",

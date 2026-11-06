@@ -91,7 +91,7 @@ header{padding-block:28px 8px}
 .code{margin-top:10px;border:1px solid var(--line);border-radius:12px;background:#0E0F14;overflow:hidden;min-width:0}
 .code-h span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .code-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 8px 6px 12px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.code pre{margin:0;padding:12px;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#E6E8EF;overflow-x:auto;white-space:pre}
+.code pre{margin:0;padding:12px;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#E6E8EF;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere}
 .steps li > div{min-width:0}
 .nota{display:block;margin-top:10px;font-size:13.5px;color:var(--muted);padding-left:10px;border-left:2px solid #3A3E4C}
 .credit{font-size:14px;color:var(--muted)}
@@ -159,19 +159,20 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:13px;border-top:1px 
     ["Ative e use", "Deixe a skill ligada na lista e abra uma conversa nova para usar."]
   ];
 
-  const offer = (pos) => `
+  /* Oferta do NEON EDIT. Um conteúdo pode trocar os textos com o campo "oferta": { tag, titulo, destaque, texto, botao }. */
+  const offer = (pos, o) => { o = o || {}; return `
     <aside class="offer${pos === "top" ? " top" : ""}" aria-labelledby="offer-h">
       <img src="img/logo.webp" alt="NEON EDIT" width="446" height="520" loading="lazy">
       <div class="offer-txt">
-        <span class="tag">Edição de vídeos com IA</span>
-        <h2 id="offer-h">Você grava. <span class="hl">A IA edita no seu estilo.</span></h2>
-        <p>Com o NEON EDIT, o Claude corta, legenda e anima os seus vídeos com a cara do seu projeto.</p>
+        <span class="tag">${esc(o.tag || "Edição de vídeos com IA")}</span>
+        <h2 id="offer-h">${esc(o.titulo || "Você grava.")} <span class="hl">${esc(o.destaque || "A IA edita no seu estilo.")}</span></h2>
+        <p>${esc(o.texto || "Com o NEON EDIT, o Claude corta, legenda e anima os seus vídeos com a cara do seu projeto.")}</p>
         <div class="row">
-          <a class="btn" href="${esc(window.NEON_EDIT_URL)}" target="_blank" rel="noopener">CONHECER O NEON EDIT<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn" href="${esc(window.NEON_EDIT_URL)}" target="_blank" rel="noopener">${esc(o.botao || "CONHECER O NEON EDIT")}<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <span class="price">R$97</span>
         </div>
       </div>
-    </aside>`;
+    </aside>`; };
 
   function renderList(){
     document.title = "Hub NEON";
@@ -226,7 +227,7 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:13px;border-top:1px 
     const btns = [];
     if (c.arquivo) btns.push(`<a class="btn" href="${esc(c.arquivo)}" download><svg aria-hidden="true"><use href="#i-down"/></svg>BAIXAR ${esc((c.tipo || "arquivo").toUpperCase())}</a>`);
     if (c.repo) btns.push(`<a class="btn${c.arquivo ? " ghost" : ""}" href="${esc(c.repo)}" target="_blank" rel="noopener">VER NO GITHUB<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>`);
-    if (!btns.length) btns.push(`<a class="btn" aria-disabled="true" role="link">ARQUIVO EM BREVE</a>`);
+    if (!btns.length && !c.semArquivo) btns.push(`<a class="btn" aria-disabled="true" role="link">ARQUIVO EM BREVE</a>`);
     if (c.video) btns.push(`<a class="btn ghost" href="${esc(c.video)}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-play"/></svg>Ver o vídeo</a>`);
     const credit = (c.autor || c.licenca) ? `<p class="credit">${c.autor ? `Criado por <b>${esc(c.autor)}</b>` : ""}${c.autor && c.licenca ? " · " : ""}${c.licenca ? `Licença ${esc(c.licenca)}` : ""}</p>` : "";
     const ex = c.exemplo ? `
@@ -241,12 +242,12 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:13px;border-top:1px 
         <h1>${esc(c.titulo)}</h1>
         ${c.descricao ? `<p>${esc(c.descricao)}</p>` : ""}
         ${credit}
-        <div class="actions">${btns.join("")}</div>
+        ${btns.length ? `<div class="actions">${btns.join("")}</div>` : ""}
         ${c.aviso ? `<p class="aviso">${esc(c.aviso)}</p>` : ""}
       </section>
       ${body}
       ${ex}
-      ${offer()}`;
+      ${offer("", c.oferta)}`;
     app.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", () => {
       const el = document.getElementById(btn.dataset.copy);
       const t = el.textContent;
